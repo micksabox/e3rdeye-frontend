@@ -58,7 +58,7 @@ const Eth3rdEye = () => {
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-2">
       <div className="flex flex-col items-center ">
-        <img className="w-1/2 -mt-8" src={"/img/symbol.png"} />
+        <img className="w-1/2 -mt-8" src={"/img/Symbol.png"} />
         <h1 className="text-6xl mb-2 -mt-16">E3rdEye</h1>
         <h3 className="text-2xl">Credibility protocol for psychic abilities</h3>
         <p>Total Sessions: {sessionIsLoading ? "Loading..." : lastSession}</p>
