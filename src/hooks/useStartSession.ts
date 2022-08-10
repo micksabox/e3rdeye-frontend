@@ -2,7 +2,7 @@ import { chain, useContractWrite, usePrepareContractWrite } from "wagmi";
 import { eth3rdContractAddress } from "../constants";
 import Eth3rdEyeAbi from "../abi/Eth3rdEye.json";
 
-const useStartSession = (args:{index:string, commitment?:string}) => {
+const useStartSession = (args:{index:string, commitment?:string, onSuccess: () => void}) => {
   const { config } = usePrepareContractWrite({
     addressOrName: eth3rdContractAddress,
     contractInterface: Eth3rdEyeAbi.abi,
@@ -23,6 +23,7 @@ const useStartSession = (args:{index:string, commitment?:string}) => {
       },
       onSuccess: (data) => {
         console.log("onSuccess", data);
+        args.onSuccess()
       },
     }
   );

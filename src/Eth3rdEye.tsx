@@ -4,10 +4,10 @@ import { chain, useAccount, useContractRead } from "wagmi";
 import { eth3rdContractAddress } from "./constants.js";
 import Eth3rdEyeAbi from "./abi/Eth3rdEye.json";
 // import Dyor from "./Dyor";
-import CreateSession from "./CreateSession";
+import Session from "./Session";
 import TestSession from "./TestSession";
 
-type Mode = "create" | "test";
+type Mode = "session" | "predict";
 
 const Eth3rdEye = () => {
   const { address, isConnected, isConnecting, isDisconnected } = useAccount();
@@ -24,25 +24,31 @@ const Eth3rdEye = () => {
     watch: true,
   });
 
-  const [mode, setMode] = useState<Mode | undefined>()
+  const [mode, setMode] = useState<Mode | undefined>();
 
   return (
     <div className="flex flex-col">
-        <img className="w-1/3 block" src={"/img/symbol.png"} />
-        <h1 className="text-6xl">e3rdEye</h1>
-        {address ? address : <ConnectButton />}
+      <img className="w-1/3 block" src={"/img/symbol.png"} />
+      <h1 className="text-6xl">e3rdEye</h1>
+      {address ? address : <ConnectButton />}
 
-        <p>
-          Total Sessions: {sessionIsLoading ? "Loading..." : lastSession}
-        </p>
+      <p>Total Sessions: {sessionIsLoading ? "Loading..." : lastSession}</p>
 
-        <button onClick={()=> setMode("create")}>Create</button>
-        <button onClick={()=> setMode("test")}>Test</button>
+      <button onClick={() => setMode("session")}>Create</button>
+      <button onClick={() => setMode("predict")}>Predict</button>
 
-        { mode && mode == "create" && <CreateSession /> }
-        { mode && mode == "test" && <TestSession /> }
+      {mode && mode == "session" && (
+        <Session
+          sessionIndex={
+            lastSession
+              ? lastSession.toString()
+              : undefined
+          }
+        />
+      )}
+      {mode && mode == "predict" && <TestSession />}
 
-        {/* <Dyor /> */}
+      {/* <Dyor /> */}
     </div>
   );
 };
