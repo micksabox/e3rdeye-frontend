@@ -1,3 +1,10 @@
+# Eth3rdEye
+
+## Demo 
+[Link](https://eth3rdeye.com)
+
+[Smart-contract code](https://github.com/micksabox/e3rdeye)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
