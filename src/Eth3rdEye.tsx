@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { chain, useAccount, useContractRead } from "wagmi";
 import { eth3rdContractAddress } from "./constants.js";
@@ -15,7 +15,6 @@ const Eth3rdEye = () => {
   const {
     data: lastSession,
     isLoading: sessionIsLoading,
-    isError,
   } = useContractRead({
     addressOrName: eth3rdContractAddress,
     contractInterface: Eth3rdEyeAbi.abi,
@@ -24,7 +23,38 @@ const Eth3rdEye = () => {
     watch: true,
   });
 
+  const {
+    data: accountAccuracy,
+    isFetched: accuracyFetched,
+  } = useContractRead({
+    addressOrName: eth3rdContractAddress,
+    contractInterface: Eth3rdEyeAbi.abi,
+    functionName: "accuracy",
+    enabled: !!address,
+    args: [address],
+    chainId: chain.goerli.id,
+  });
+
+  const {
+    data: accountAttempts,
+    isFetched: attemptsFetched
+  } = useContractRead({
+    addressOrName: eth3rdContractAddress,
+    contractInterface: Eth3rdEyeAbi.abi,
+    functionName: "attempts",
+    enabled: !!address,
+    args: [address],
+    chainId: chain.goerli.id,
+  });
+
   const [mode, setMode] = useState<Mode | undefined>();
+  const [score, setScore] = useState<number>(0)
+
+  useEffect(()=>{
+    if(accuracyFetched && attemptsFetched){
+      setScore( parseInt(accountAccuracy.toString()) / parseInt(accountAttempts.toString()) )
+    }
+  }, [accountAccuracy, accountAttempts]);
 
   return (
     <div className="flex flex-col">
@@ -33,6 +63,7 @@ const Eth3rdEye = () => {
       {address ? address : <ConnectButton />}
 
       <p>Total Sessions: {sessionIsLoading ? "Loading..." : lastSession}</p>
+      <p>Account Score: {score !== undefined ? (score * 100) : "-"}%</p>
 
       <button onClick={() => setMode("session")}>Create</button>
       <button onClick={() => setMode("predict")}>Predict</button>
