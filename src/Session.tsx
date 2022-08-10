@@ -28,7 +28,7 @@ type Prop = {
   sessionIndex?: string;
 };
 
-const CreateSession = (props: Prop) => {
+const Session = (props: Prop) => {
   const [selectedTarget, setSelectedTarget] = useState<string | undefined>();
   const [index, setIndex] = useState(props.sessionIndex)
   const [salt, setSalt] = useState<string>()
@@ -119,4 +119,4 @@ const CreateSession = (props: Prop) => {
   );
 };
 
-export default CreateSession;
+export default Session;

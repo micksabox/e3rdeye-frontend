@@ -37,7 +37,7 @@ const wagmiClient = createClient({
 
 function MyApp({ Component, pageProps }) {
   return <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider initialChain={chain.goerli} chains={chains}>
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
