@@ -44,7 +44,10 @@ const Predict = (props: Prop) => {
       >
         Submit Prediction
       </button>
-      <button className={clsx(buttonClassName, "ml-2")} onClick={() => claimAccuracy.write?.() } disabled={!claimAccuracy.write} >Claim Accuracy</button>
+      <hr className="my-2" />
+      <p>If you submitted a prediction for this game before the target was revealed, you can claim Accuracy.</p>
+
+      <button className={clsx(buttonClassName, "w-full mt-2")} onClick={() => claimAccuracy.write?.() } disabled={!claimAccuracy.write} >Claim Accuracy</button>
     </div>
   );
 };

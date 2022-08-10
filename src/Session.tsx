@@ -102,6 +102,10 @@ const Session = (props: Prop) => {
       >
         Save Commitment
       </button>
+
+      <hr className="my-2" />
+      <p>If you were the tasker for this game, you can reveal the Target.</p>
+
       <button
         className={clsx(buttonClassName, "w-full mt-2")}
         disabled={!revealTarget.write}
