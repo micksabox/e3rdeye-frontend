@@ -68,8 +68,8 @@ const Eth3rdEye = () => {
         <h3 className="text-2xl mb-2 font-semibold">My E3rdEye</h3>
         {address ? address.substring(0,8) : <ConnectButton />}
         </div>
-        <p className="mb-2">
-          Account Prediction Score: {score !== undefined ? score * 100 : "-"}%
+        <p className="mb-2 text-lg">
+          Verified Prediction Score: {score !== undefined ? score * 100 : "-"}%
         </p>
 
         <button
