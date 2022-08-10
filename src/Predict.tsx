@@ -38,14 +38,14 @@ const Predict = (props: Prop) => {
       <p>Select your prediction:</p>
       <TargetList selected={prediction} onSelect={(val) => setPrediction(val)} />
       <button
-        className={buttonClassName}
+        className={clsx(buttonClassName, "bg-turquoise text-white w-full")}
         disabled={!submitPrediction.write || !prediction}
         onClick={() => submitPrediction.write?.()}
       >
         Submit Prediction
       </button>
       <hr className="my-2" />
-      <p>If you submitted a prediction for this game before the target was revealed, you can claim Accuracy.</p>
+      <p>If you submitted a prediction for this Session before the target was revealed, you can claim Accuracy.</p>
 
       <button className={clsx(buttonClassName, "w-full mt-2")} onClick={() => claimAccuracy.write?.() } disabled={!claimAccuracy.write} >Claim Accuracy</button>
     </div>
