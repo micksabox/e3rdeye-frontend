@@ -91,8 +91,9 @@ const Session = (props: Prop) => {
   return (
     <div>
       <p className="font-bold text-xl">Choose your target:</p>
-      <p>You will be committed to your choice for the game.</p>
       <TargetList selected={selectedTarget} onSelect={(val) => setSelectedTarget(val)} />
+      <p>Note: You will be committed to your choice for the Session. Once Predictions have been made, you must Reveal Target in order for Predictions to be compared on-chain.</p>
+
       <button
         className={clsx( buttonClassName, "w-full bg-turquoise text-white")}
         disabled={!selectedTarget || !startSession.write}
