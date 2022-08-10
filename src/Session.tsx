@@ -105,7 +105,7 @@ const Session = (props: Prop) => {
       </button>
 
       <hr className="my-2" />
-      <p>If you were the tasker for this game, you can reveal the Target.</p>
+      <p>If you started this Session, you can reveal the Target.</p>
 
       <button
         className={clsx(buttonClassName, "w-full mt-2")}

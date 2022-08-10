@@ -35,7 +35,7 @@ const Predict = (props: Prop) => {
 
   return (
     <div>
-      <p>Select your prediction:</p>
+      <p className="font-bold text-xl">Select your prediction:</p>
       <TargetList selected={prediction} onSelect={(val) => setPrediction(val)} />
       <button
         className={clsx(buttonClassName, "bg-turquoise text-white w-full")}

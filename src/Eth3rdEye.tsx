@@ -3,7 +3,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { chain, useAccount, useContractRead } from "wagmi";
 import { eth3rdContractAddress, buttonClassName } from "./constants";
 import Eth3rdEyeAbi from "./abi/Eth3rdEye.json";
-// import Dyor from "./Dyor";
+import Dyor from "./Dyor";
 import Session from "./Session";
 import Predict from "./Predict";
 import clsx from "clsx";
@@ -63,13 +63,13 @@ const Eth3rdEye = () => {
         <h3 className="text-2xl text-center">Credibility protocol for psychic abilities</h3>
         <p>Total Sessions: {sessionIsLoading ? "Loading..." : lastSession}</p>
       </div>
-      <div className="mt-4 p-2">
+      <div className="p-4">
         <div className="flex justify-between">
         <h3 className="text-2xl mb-2 font-semibold">My E3rdEye</h3>
         {address ? address.substring(0,8) : <ConnectButton />}
         </div>
         <p className="my-2 text-lg">
-          Verified Prediction Score: {score !== undefined ? score * 100 : "-"}%
+          Verified Prediction Score: {score !== undefined ? <span className="text-xl font-semibold">{score * 100}</span> : "-"}%
         </p>
 
         <button
@@ -103,10 +103,11 @@ const Eth3rdEye = () => {
               sessionIndex={lastSession ? lastSession.toString() : undefined}
             />
           )}
+          {mode == undefined && <p>If you're seeking validation of psychic practitioner(s), start a Session. If you're a Psychic practioner, predict the Target of a Session using your natural abilities.</p>}
         </div>
       </div>
 
-      {/* <Dyor /> */}
+      <Dyor />
     </div>
   );
 };
