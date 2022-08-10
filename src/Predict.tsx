@@ -1,7 +1,10 @@
 import { useState } from "react";
+import clsx from "clsx";
+
+import { buttonClassName } from "./constants";
 import useClaimAccuracy from "./hooks/useClaimAccuracy";
 import useSubmitPrediction from "./hooks/useSubmitPrediction";
-import targets from "./targets";
+import TargetList from "./TargetList";
 
 type Prop = {
   sessionIndex?: string;
@@ -14,7 +17,7 @@ function makeStorageKey( index) {
 }
 
 
-const TestSession = (props: Prop) => {
+const Predict = (props: Prop) => {
   const [prediction, setPrediction] = useState<string>();
 
   const submitPrediction = useSubmitPrediction({
@@ -33,21 +36,17 @@ const TestSession = (props: Prop) => {
   return (
     <div>
       <p>Select your prediction:</p>
-      {targets.map((t) => (
-        <button onClick={() => setPrediction(t.value)} key={t.value}>
-          {t.value}
-        </button>
-      ))}
+      <TargetList selected={prediction} onSelect={(val) => setPrediction(val)} />
       <button
+        className={buttonClassName}
         disabled={!submitPrediction.write || !prediction}
         onClick={() => submitPrediction.write?.()}
-        className="bg-gray-200 disabled:opacity-40 p-2 rounded"
       >
         Submit Prediction
       </button>
-      <button onClick={() => claimAccuracy.write?.() } disabled={!claimAccuracy.write} className="bg-gray-200 disabled:opacity-40 p-2 rounded">Claim Accuracy</button>
+      <button className={clsx(buttonClassName, "ml-2")} onClick={() => claimAccuracy.write?.() } disabled={!claimAccuracy.write} >Claim Accuracy</button>
     </div>
   );
 };
 
-export default TestSession;
+export default Predict;

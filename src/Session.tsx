@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import clsx from "clsx";
 import { keccak256 } from "@ethersproject/keccak256";
 import { defaultAbiCoder } from "ethers/lib/utils";
 
 import targets from "./targets";
 import useStartSession from "./hooks/useStartSession";
 import useRevealTarget from "./hooks/useRevealTarget";
+import { buttonClassName } from "./constants";
+import TargetList from "./TargetList";
 
 const LocalStorageKeySalt = "Eth3rdEye-Session-Salt";
 const LocalStorageKeyTarget = "Eth3rdEye-Session-Target";
@@ -87,27 +90,20 @@ const Session = (props: Prop) => {
 
   return (
     <div>
-      <p>Choose your target:</p>
-      {targets.map((t) => (
-        <button
-          className="p-2 w-full bg-gray-200"
-          onClick={() => setSelectedTarget(t.value)}
-          key={t.value}
-        >
-          {t.value}
-        </button>
-      ))}
+      <p className="font-bold text-xl">Choose your target:</p>
+      <p>You will be committed to your choice for the game.</p>
+      <TargetList selected={selectedTarget} onSelect={(val) => setSelectedTarget(val)} />
       <button
-        className="disabled:opacity-40 bg-red-800"
+        className={clsx( buttonClassName, "w-full bg-turquoise text-white")}
         disabled={!selectedTarget || !startSession.write}
         onClick={() => {
           startSession.write?.();
         }}
       >
-        Submit
+        Save Commitment
       </button>
       <button
-        className="disabled:opacity-40 bg-red-800"
+        className={clsx(buttonClassName, "w-full mt-2")}
         disabled={!revealTarget.write}
         onClick={() => {
           revealTarget.writeAsync?.().then((res) => console.log(res));
