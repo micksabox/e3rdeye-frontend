@@ -5,7 +5,7 @@ import { eth3rdContractAddress } from "./constants.js";
 import Eth3rdEyeAbi from "./abi/Eth3rdEye.json";
 // import Dyor from "./Dyor";
 import Session from "./Session";
-import TestSession from "./TestSession";
+import Predict from "./Predict";
 
 type Mode = "session" | "predict";
 
@@ -39,14 +39,14 @@ const Eth3rdEye = () => {
 
       {mode && mode == "session" && (
         <Session
-          sessionIndex={
-            lastSession
-              ? lastSession.toString()
-              : undefined
-          }
+          sessionIndex={lastSession ? lastSession.toString() : undefined}
         />
       )}
-      {mode && mode == "predict" && <TestSession />}
+      {mode && mode == "predict" && (
+        <Predict
+          sessionIndex={lastSession ? lastSession.toString() : undefined}
+        />
+      )}
 
       {/* <Dyor /> */}
     </div>
