@@ -69,7 +69,7 @@ const Eth3rdEye = () => {
         {address ? address.substring(0,8) : <ConnectButton />}
         </div>
         <p className="my-2 text-lg">
-          Verified Prediction Score: {score !== undefined ? <span className="text-xl font-semibold">{score * 100}</span> : "-"}%
+          Verified Prediction Score: {score !== undefined ? <span className="text-xl font-semibold">{(score * 100).toFixed(1)}</span> : "-"}%
         </p>
 
         <button
